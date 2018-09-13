@@ -104,9 +104,9 @@ public class SpringMvcTestCustomerControllerTest {
 
     @Test
     public void testDeleteCustomer() throws Exception {
-        createCustomer();
+        Customer customer = createCustomer();
 
-        this.mockMvc.perform(delete(CustomerRestURIConstants.DELETE_CUSTOMER, 102))
+        this.mockMvc.perform(delete(CustomerRestURIConstants.DELETE_CUSTOMER, customer.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));

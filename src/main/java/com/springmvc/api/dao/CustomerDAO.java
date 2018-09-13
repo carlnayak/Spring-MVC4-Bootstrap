@@ -12,13 +12,11 @@ import java.util.List;
 public class CustomerDAO {
 
     // Dummy database. Initialize with some dummy values.
-    private static List<Customer> customers;
-    static {
-        customers = new ArrayList<>();
-        customers.add(new Customer(101, "John", "Doe", "djohn@gmail.com", "121-232-3435", new GregorianCalendar(1990, Calendar.DECEMBER, 15).getTime()));
-        customers.add(new Customer(201, "Russ", "Smith", "sruss@gmail.com", "343-545-2345", new GregorianCalendar(2000, Calendar.FEBRUARY, 27).getTime()));
-        customers.add(new Customer(301, "Kate", "Williams", "kwilliams@gmail.com", "876-237-2987", new GregorianCalendar(2010, Calendar.JULY, 30).getTime()));
-    }
+    private static List<Customer> customers = new ArrayList<Customer>() {
+        { add(new Customer(101, "John", "Doe", "djohn@gmail.com", "121-232-3435", new GregorianCalendar(1990, Calendar.DECEMBER, 15).getTime())); }
+        { add(new Customer(201, "Russ", "Smith", "sruss@gmail.com", "343-545-2345", new GregorianCalendar(2000, Calendar.FEBRUARY, 27).getTime())); }
+        { add(new Customer(301, "Kate", "Williams", "kwilliams@gmail.com", "876-237-2987", new GregorianCalendar(2010, Calendar.JULY, 30).getTime())); }
+    };
 
     /**
      * Returns list of customers from dummy database.
@@ -47,15 +45,13 @@ public class CustomerDAO {
     }
 
     /**
-     * Create new customer in dummy database. Updates the id and insert new
-     * customer in list.
+     * Create new customer in dummy database.
      *
      * @param customer
      *            Customer object
-     * @return customer object with updated id
+     * @return customer object
      */
     public Customer create(Customer customer) {
-        customer.setId(customer.getId());
         customers.add(customer);
         return customer;
     }
