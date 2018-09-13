@@ -1,10 +1,12 @@
 package com.springmvc.api.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.springmvc.api.model.Customer;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 @Component
 public class CustomerDAO {
@@ -13,9 +15,9 @@ public class CustomerDAO {
     private static List<Customer> customers;
     static {
         customers = new ArrayList<>();
-        customers.add(new Customer(101, "John", "Doe", "djohn@gmail.com", "121-232-3435"));
-        customers.add(new Customer(201, "Russ", "Smith", "sruss@gmail.com", "343-545-2345"));
-        customers.add(new Customer(301, "Kate", "Williams", "kwilliams@gmail.com", "876-237-2987"));
+        customers.add(new Customer(101, "John", "Doe", "djohn@gmail.com", "121-232-3435", new GregorianCalendar(1990, Calendar.DECEMBER, 15).getTime()));
+        customers.add(new Customer(201, "Russ", "Smith", "sruss@gmail.com", "343-545-2345", new GregorianCalendar(2000, Calendar.FEBRUARY, 27).getTime()));
+        customers.add(new Customer(301, "Kate", "Williams", "kwilliams@gmail.com", "876-237-2987", new GregorianCalendar(2010, Calendar.JULY, 30).getTime()));
     }
 
     /**
@@ -53,7 +55,7 @@ public class CustomerDAO {
      * @return customer object with updated id
      */
     public Customer create(Customer customer) {
-        customer.setId(System.currentTimeMillis());
+        customer.setId(customer.getId());
         customers.add(customer);
         return customer;
     }

@@ -1,8 +1,14 @@
 package com.springmvc.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.springmvc.api.controller.CustomerRestURIConstants;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Customer {
+public class Customer implements Serializable {
+    private static final long serialVersionUID = -7788619177798333712L;
+
     private Long id;
     private String firstName;
     private String lastName;
@@ -10,13 +16,15 @@ public class Customer {
     private String mobile;
     private Date dateOfBirth;
 
-    public Customer(long id, String firstName, String lastName, String email, String mobile) {
+    public Customer() { }
+
+    public Customer(long id, String firstName, String lastName, String email, String mobile, Date dob) {
         this.setId(id);
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEmail(email);
         this.setMobile(mobile);
-        this.setDateOfBirth(new Date());
+        this.setDateOfBirth(dob);
     }
 
     public Long getId() {
@@ -59,11 +67,25 @@ public class Customer {
         this.mobile = mobile;
     }
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomerRestURIConstants.DATE_FORMAT)
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("id : " + Long.toString(getId()));
+        sb.append("\n First Name : " + getFirstName());
+        sb.append("\n Last Name : " + getLastName());
+        sb.append("\n Email : " + getEmail());
+        sb.append("\n Mobile : " + getMobile());
+        sb.append("\n Date Of Birth : " + getDateOfBirth().toString());
+        sb.append("\n");
+        return sb.toString();
     }
 }
